@@ -522,11 +522,11 @@ export default function HomePage() {
               Bring your own podcasts via RSS; the defaults are optional, not
               mandatory.
             </p>
-            <div className="mt-12 grid gap-10 sm:grid-cols-2 sm:gap-8 lg:gap-12">
+            <div className="mt-12 grid justify-items-center gap-10 sm:grid-cols-2 sm:gap-8 lg:gap-12">
               {SETTINGS_SCREENSHOTS.map(({ src, alt, caption }) => (
                 <figure
                   key={src}
-                  className="mx-auto w-full max-w-[14.5rem] sm:max-w-none"
+                  className="w-full max-w-[10.75rem] sm:max-w-[11rem]"
                 >
                   <div className="overflow-hidden rounded-[1.75rem] border border-[hsl(var(--foreground))]/10 bg-[hsl(var(--foreground))]/[0.02] shadow-[0_16px_32px_-8px_rgb(0_0_0_/0.12)] dark:shadow-[0_16px_32px_-8px_rgb(0_0_0_/0.35)]">
                     <Image
@@ -535,10 +535,10 @@ export default function HomePage() {
                       width={SHOT_W}
                       height={SHOT_H}
                       className="h-auto w-full"
-                      sizes="(min-width: 1024px) 320px, (min-width: 640px) 45vw, 232px"
+                      sizes="176px"
                     />
                   </div>
-                  <figcaption className="mt-4 max-w-sm text-center text-sm text-[hsl(var(--foreground))]/60 sm:text-left">
+                  <figcaption className="mt-4 max-w-[11rem] text-center text-sm text-[hsl(var(--foreground))]/60 sm:text-left">
                     {caption}
                   </figcaption>
                 </figure>
@@ -605,9 +605,14 @@ export default function HomePage() {
 
         <footer className="relative mx-auto max-w-6xl border-t border-[hsl(var(--foreground))]/10 px-6 py-10">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-[hsl(var(--foreground))]/55">
-              © {new Date().getFullYear()} LunarCast
-            </p>
+            <div className="space-y-1">
+              <p className="text-sm text-[hsl(var(--foreground))]/55">
+                © {new Date().getFullYear()} LunarCast
+              </p>
+              <p className="text-sm text-[hsl(var(--foreground))]/45">
+                Because the moon had it coming.
+              </p>
+            </div>
             <Link
               href="/privacy"
               className="text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 hover:underline"
