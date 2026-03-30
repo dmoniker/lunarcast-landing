@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "Privacy overview for LunarCast: no ads, minimal data, and no dark patterns.",
+    "How LunarCast treats your data: built in good faith, no ads, minimal collection, optimistic intent.",
 };
 
 export default function PrivacyPage() {
@@ -21,13 +21,34 @@ export default function PrivacyPage() {
       <h1 className="text-3xl font-semibold tracking-tight text-[hsl(var(--foreground))]">
         Privacy
       </h1>
-      <p className="mt-6 text-[hsl(var(--foreground))]/85">
-        This page is a stub. Replace it with your final policy before launch. The
-        product direction for LunarCast is straightforward: no ads, no sale of
-        listening history for marketing, and no noisy notifications by default.
-        Contact and data practices will live here in full legal form when you
-        ship.
-      </p>
+      <div className="mt-6 space-y-5 text-[hsl(var(--foreground))]/85">
+        <p>
+          We built LunarCast for ourselves: a calm place to hear stories and
+          ideas about where humanity is headed, without the usual noise. Our
+          aim is simple—to help this kind of optimistic, forward-looking
+          perspective travel further, because we think it deserves a wider
+          audience than doom-scrolling usually allows.
+        </p>
+        <p>
+          That intent carries over to how we treat you here. LunarCast does not
+          run ads in the product, and we do not sell or rent your listening
+          history to marketers. Notifications stay quiet unless you opt into
+          them; we are not interested in tricking you into engagement.
+        </p>
+        <p>
+          If you join the waitlist, we use your email only to send beta access,
+          launch updates, and related LunarCast messages—not unrelated campaigns.
+          You can unsubscribe from those mailings at any time. Anything the app
+          needs to function in the future (for example, account or playback
+          data) will be collected only for that purpose, not to profile you for
+          ads.
+        </p>
+        <p>
+          If you have questions about privacy or this approach, reply to any
+          email you get from us about LunarCast—we read those and respond when
+          we can.
+        </p>
+      </div>
     </main>
   );
 }

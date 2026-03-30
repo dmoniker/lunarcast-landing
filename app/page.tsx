@@ -3,7 +3,72 @@ import Link from "next/link";
 
 const appStoreUrl = "https://apps.apple.com/app/lunarcast/id0000000000";
 
-const SCREENSHOTS = [
+/** Flip to `true` when the App Store listing is live. */
+const APP_STORE_LIVE = false;
+
+const appStoreWaitlistTooltip =
+  "Let us know your email address and we'll notify you as soon as it's available.";
+
+function AppStoreCta({
+  variant,
+  children,
+}: {
+  variant: "primary" | "outline";
+  children: React.ReactNode;
+}) {
+  const primary =
+    "inline-flex w-fit items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90";
+  const primaryDisabled =
+    "inline-flex w-fit items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground opacity-50";
+  const outline =
+    "inline-flex items-center justify-center rounded-full border border-[hsl(var(--foreground))]/20 px-6 py-3 text-sm font-medium text-[hsl(var(--foreground))] transition-colors hover:border-[hsl(var(--foreground))]/35 hover:bg-[hsl(var(--foreground))]/[0.04]";
+  const outlineDisabled =
+    "inline-flex items-center justify-center rounded-full border border-[hsl(var(--foreground))]/20 px-6 py-3 text-sm font-medium text-[hsl(var(--foreground))] opacity-50";
+
+  if (APP_STORE_LIVE) {
+    return (
+      <a
+        href={appStoreUrl}
+        rel="noopener noreferrer"
+        className={variant === "primary" ? primary : outline}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <span
+      className={
+        variant === "primary"
+          ? "inline-flex w-fit cursor-not-allowed"
+          : "inline-flex cursor-not-allowed"
+      }
+      title={appStoreWaitlistTooltip}
+    >
+      <button
+        type="button"
+        disabled
+        className={
+          (variant === "primary" ? primaryDisabled : outlineDisabled) +
+          " cursor-not-allowed"
+        }
+      >
+        {children}
+        <span className="sr-only"> {appStoreWaitlistTooltip}</span>
+      </button>
+    </span>
+  );
+}
+
+type AppScreenshot = {
+  src: string;
+  alt: string;
+  /** Shown under the figure when set (e.g. feature callout). */
+  callout?: string;
+};
+
+const SCREENSHOTS: AppScreenshot[] = [
   {
     src: "/screenshots/home-feed.PNG",
     alt: "LunarCast home feed with show artwork and episode list",
@@ -11,6 +76,8 @@ const SCREENSHOTS = [
   {
     src: "/screenshots/elon-feed.PNG",
     alt: "LunarCast feed focused on Elon Musk interviews and related shows",
+    callout:
+      "A curated Elon Musk feed—long interviews and shows worth relistening to. Built for ourselves, and we figured you might like it too.",
   },
   {
     src: "/screenshots/innermost-feed.PNG",
@@ -28,7 +95,7 @@ const SCREENSHOTS = [
     src: "/screenshots/player2.PNG",
     alt: "LunarCast player with episode details",
   },
-] as const;
+];
 
 const SETTINGS_SCREENSHOTS = [
   {
@@ -187,7 +254,10 @@ export default function HomePage() {
           </nav>
         </header>
 
-        <main id="main" className="relative mx-auto max-w-6xl px-6 pb-24 pt-4 sm:pt-8">
+        <main
+          id="main"
+          className="relative mx-auto max-w-6xl px-6 pb-24 pt-4 sm:pt-8"
+        >
           <section
             className="border-b border-[hsl(var(--foreground))]/10 pb-16 sm:pb-20"
             aria-labelledby="hero-heading"
@@ -224,13 +294,9 @@ export default function HomePage() {
                   your rules.
                 </p>
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3">
-                  <a
-                    href={appStoreUrl}
-                    rel="noopener noreferrer"
-                    className="inline-flex w-fit items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-                  >
+                  <AppStoreCta variant="primary">
                     Download on the App Store
-                  </a>
+                  </AppStoreCta>
                   <a
                     href="#waitlist"
                     className="w-fit text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 hover:underline"
@@ -269,25 +335,30 @@ export default function HomePage() {
             className="border-b border-[hsl(var(--foreground))]/10 py-16 sm:py-20"
             aria-labelledby="screenshots-heading"
           >
-            <SectionHeading id="screenshots-heading">
-              In the app
-            </SectionHeading>
+            <SectionHeading id="screenshots-heading">In the app</SectionHeading>
             <p className="mt-4 max-w-xl text-[hsl(var(--foreground))]/80">
               A few real screens—no mockups, no decoration beyond the phone
               frame.
             </p>
             <ul className="mt-12 grid list-none gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
-              {SCREENSHOTS.slice(1).map(({ src, alt }) => (
+              {SCREENSHOTS.slice(1).map(({ src, alt, callout }) => (
                 <li key={src} className="mx-auto w-full max-w-[14.5rem]">
-                  <figure className="overflow-hidden rounded-[1.75rem] border border-[hsl(var(--foreground))]/10 bg-[hsl(var(--foreground))]/[0.02] shadow-[0_16px_32px_-8px_rgb(0_0_0_/0.12)] dark:shadow-[0_16px_32px_-8px_rgb(0_0_0_/0.35)]">
-                    <Image
-                      src={src}
-                      alt={alt}
-                      width={SHOT_W}
-                      height={SHOT_H}
-                      className="h-auto w-full"
-                      sizes="(min-width: 1024px) 240px, (min-width: 640px) 45vw, 232px"
-                    />
+                  <figure>
+                    <div className="overflow-hidden rounded-[1.75rem] border border-[hsl(var(--foreground))]/10 bg-[hsl(var(--foreground))]/[0.02] shadow-[0_16px_32px_-8px_rgb(0_0_0_/0.12)] dark:shadow-[0_16px_32px_-8px_rgb(0_0_0_/0.35)]">
+                      <Image
+                        src={src}
+                        alt={alt}
+                        width={SHOT_W}
+                        height={SHOT_H}
+                        className="h-auto w-full"
+                        sizes="(min-width: 1024px) 240px, (min-width: 640px) 45vw, 232px"
+                      />
+                    </div>
+                    {callout ? (
+                      <figcaption className="mt-4 rounded-xl border border-accent/25 bg-accent/[0.06] px-3 py-3 text-left text-sm leading-snug text-[hsl(var(--foreground))]/85 dark:bg-accent/[0.09]">
+                        {callout}
+                      </figcaption>
+                    ) : null}
                   </figure>
                 </li>
               ))}
@@ -300,9 +371,9 @@ export default function HomePage() {
           >
             <SectionHeading id="what-it-is-heading">What it is</SectionHeading>
             <p className="mt-4 max-w-xl text-[hsl(var(--foreground))]/80">
-              A curated lens on quality audio, not an infinite firehose. You open
-              the app to listen on purpose. News and updates live in their own
-              space—read the signal now, hit play when you have the time.
+              A curated lens on quality audio, not an infinite firehose. You
+              open the app to listen on purpose. News and updates live in their
+              own space—read the signal now, hit play when you have the time.
             </p>
           </section>
 
@@ -358,7 +429,9 @@ export default function HomePage() {
                     <th scope="row" className="px-4 py-3 font-normal">
                       Ads
                     </th>
-                    <td className="px-4 py-3">None in the experience we ship.</td>
+                    <td className="px-4 py-3">
+                      None in the experience we ship.
+                    </td>
                     <td className="px-4 py-3">
                       Often interleaved or in the UI.
                     </td>
@@ -378,7 +451,9 @@ export default function HomePage() {
                     <th scope="row" className="px-4 py-3 font-normal">
                       Queue
                     </th>
-                    <td className="px-4 py-3">Yours. Autoplay stays predictable.</td>
+                    <td className="px-4 py-3">
+                      Yours. Autoplay stays predictable.
+                    </td>
                     <td className="px-4 py-3">
                       Easy for extra episodes to appear without a clear ask.
                     </td>
@@ -388,7 +463,8 @@ export default function HomePage() {
                       News vs play
                     </th>
                     <td className="px-4 py-3">
-                      Separate surfaces: read when skimming, listen when settled.
+                      Separate surfaces: read when skimming, listen when
+                      settled.
                     </td>
                     <td className="px-4 py-3">
                       Often one busy screen trying to do everything.
@@ -425,9 +501,10 @@ export default function HomePage() {
               Add podcasts with an RSS URL. Keep the catalog you already trust.
             </p>
             <p className="mt-4 max-w-xl text-[hsl(var(--foreground))]/80">
-              The player respects how you actually listen: change playback speed,
-              set skip forward and back to the intervals you like, and let the
-              next episode start when you are ready—without surprise insertions.
+              The player respects how you actually listen: change playback
+              speed, set skip forward and back to the intervals you like, and
+              let the next episode start when you are ready—without surprise
+              insertions.
             </p>
           </section>
 
@@ -496,7 +573,7 @@ export default function HomePage() {
               >
                 privacy page
               </Link>{" "}
-              as policies are finalized.
+              for how we use data and why we built the app.
             </p>
           </section>
 
@@ -506,24 +583,22 @@ export default function HomePage() {
             </SectionHeading>
             <p className="mt-4 max-w-xl text-[hsl(var(--foreground))]/80">
               LunarCast is shaped around a simple deal: your attention is not
-              for sale to advertisers on this product. Detailed policy language
-              will live on the{" "}
+              for sale to advertisers, and we do not monetize listening history
+              for marketing. We built this for ourselves and to spread
+              optimistic, well-grounded stories about humanity’s future—privacy
+              is part of that same intent.{" "}
               <Link
                 href="/privacy"
                 className="text-accent underline-offset-4 hover:underline"
               >
-                privacy page
-              </Link>{" "}
-              as you finalize legal copy for the store.
+                Read the full privacy page
+              </Link>
+              .
             </p>
             <p className="mt-8">
-              <a
-                href={appStoreUrl}
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-[hsl(var(--foreground))]/20 px-6 py-3 text-sm font-medium text-[hsl(var(--foreground))] transition-colors hover:border-[hsl(var(--foreground))]/35 hover:bg-[hsl(var(--foreground))]/[0.04]"
-              >
+              <AppStoreCta variant="outline">
                 Get LunarCast on the App Store
-              </a>
+              </AppStoreCta>
             </p>
           </section>
         </main>
