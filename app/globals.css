@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: 215 32% 38%;
+  --accent-foreground: 0 0% 100%;
+  --surface: 220 14% 98%;
+  --foreground: 222 22% 12%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: 210 36% 58%;
+    --accent-foreground: 222 22% 8%;
+    --surface: 222 18% 10%;
+    --foreground: 210 20% 96%;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  @apply bg-[hsl(var(--surface))] text-[hsl(var(--foreground))] antialiased;
+}
+
+@layer base {
+  :focus-visible {
+    @apply rounded-sm outline outline-2 outline-offset-2 outline-accent;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  .skip-link:focus {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 50;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    clip-path: none;
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap;
+    border-width: 0;
+    border-radius: 0.25rem;
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 2px;
+  }
+}
