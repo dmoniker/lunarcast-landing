@@ -20,9 +20,15 @@ export const metadata: Metadata = {
     "LunarCast is a simple iOS podcast app: curated long-form interviews and tech signal, news separate from playback, RSS for any show, and no ads or discovery pressure.",
   applicationName: "LunarCast",
   alternates: { canonical: "/" },
+  manifest: "/favicon/site.webmanifest",
+  appleWebApp: { title: "LunarCast" },
   icons: {
-    icon: [{ url: "/lunarcast-icon.png", type: "image/png", sizes: "1024x1024" }],
-    apple: [{ url: "/lunarcast-icon.png", sizes: "1024x1024" }],
+    icon: [
+      { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon/favicon.ico",
+    apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
     type: "website",
