@@ -244,7 +244,13 @@ export default function HomePage() {
               LunarCast
             </span>
           </span>
-          <nav aria-label="Site">
+          <nav aria-label="Site" className="flex items-center gap-5">
+            <Link
+              href="/support"
+              className="text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 transition-colors hover:text-[hsl(var(--foreground))] hover:underline"
+            >
+              Support
+            </Link>
             <Link
               href="/privacy"
               className="text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 transition-colors hover:text-[hsl(var(--foreground))] hover:underline"
@@ -613,12 +619,20 @@ export default function HomePage() {
                 Because the moon had it coming.
               </p>
             </div>
-            <Link
-              href="/privacy"
-              className="text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 hover:underline"
-            >
-              Privacy
-            </Link>
+            <div className="flex items-center gap-5">
+              <Link
+                href="/support"
+                className="text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 hover:underline"
+              >
+                Support
+              </Link>
+              <Link
+                href="/privacy"
+                className="text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 hover:underline"
+              >
+                Privacy
+              </Link>
+            </div>
           </div>
         </footer>
       </div>
