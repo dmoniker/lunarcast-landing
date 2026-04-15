@@ -20,32 +20,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Copy `.env.example` to `.env.local` and set **one** waitlist variable when you are ready (see **Waitlist** below).
-
-## Waitlist (free providers)
-
-The homepage has a **Beta access & App Store launch (iOS)** block. It needs no backend: either embed **Google Forms** or POST to **ConvertKit**’s public form URL.
-
-### Option A — Google Forms (free)
-
-1. Create a form with at least a short-answer email field (and optional questions).
-2. Click **Send** → embed `<>` → copy the **iframe `src` URL**. It must end with `…/viewform?embedded=true`.
-3. Set in `.env.local` and on Vercel:
-
-   `NEXT_PUBLIC_WAITLIST_FORM_EMBED_URL=<that full URL>`
-
-### Option B — ConvertKit (free tier)
-
-1. Create a form; in embed/HTML, find the **`action`** of the `<form>` (typically `https://app.convertkit.com/forms/<id>/subscriptions`).
-2. Set:
-
-   `NEXT_PUBLIC_CONVERTKIT_FORM_ACTION=<that URL>`
-
-   Do **not** set both ConvertKit and Google embed; ConvertKit is used first if both are set.
-
-### Option C — Other tools
-
-Anything that gives you an **embeddable HTTPS URL** for an iframe can use `NEXT_PUBLIC_WAITLIST_FORM_EMBED_URL` (e.g. Tally, Typeform embed links—check their docs for `embedded` or iframe URLs).
+This site needs no environment variables; see `.env.example`.
 
 ## Build
 
@@ -78,11 +53,10 @@ Do not run **`next dev`** and **`next start`** at the same time on the same fold
 
 1. Push this repo to GitHub (or connect your folder in the Vercel dashboard).
 2. Import the project in [Vercel](https://vercel.com): framework preset **Next.js**, root directory the repo root.
-3. Optional: add waitlist env vars under **Settings → Environment Variables** (`NEXT_PUBLIC_CONVERTKIT_FORM_ACTION` or `NEXT_PUBLIC_WAITLIST_FORM_EMBED_URL`). The site works without them; the form area shows setup instructions until one is set.
-4. After the first deploy, set **Settings → Domains** to your production host.
-5. In `app/layout.tsx`, update `metadataBase` and `alternates.canonical` to match your real URL (currently `https://lunarcast.app` as a placeholder).
+3. After the first deploy, set **Settings → Domains** to your production host.
+4. In `app/layout.tsx`, update `metadataBase` and `alternates.canonical` to match your real URL (currently `https://lunarcast.app` as a placeholder).
 
-Replace the App Store URL in `app/page.tsx` (`appStoreUrl`) with your live listing when it exists.
+Keep `appStoreUrl` and `APP_STORE_LIVE` in `app/page.tsx` aligned with your App Store listing.
 
 ## Stack
 

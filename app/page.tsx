@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const appStoreUrl = "https://apps.apple.com/app/lunarcast/id0000000000";
+const appStoreUrl = "https://apps.apple.com/app/lunarcast/id6761336207";
 
 /** Flip to `true` when the App Store listing is live. */
-const APP_STORE_LIVE = false;
+const APP_STORE_LIVE = true;
 
 const appStoreWaitlistTooltip =
   "Let us know your email address and we'll notify you as soon as it's available.";
@@ -114,93 +114,6 @@ const SETTINGS_SCREENSHOTS = [
 const SHOT_W = 1290;
 const SHOT_H = 2796;
 
-function WaitlistForm() {
-  const convertKitAction =
-    process.env.NEXT_PUBLIC_CONVERTKIT_FORM_ACTION?.trim() || null;
-  const googleEmbedUrl =
-    process.env.NEXT_PUBLIC_WAITLIST_FORM_EMBED_URL?.trim() || null;
-
-  const fieldClass =
-    "w-full max-w-md rounded-xl border border-[hsl(var(--foreground))]/20 bg-[hsl(var(--surface))] px-4 py-3 text-[hsl(var(--foreground))] shadow-sm outline-none transition-[box-shadow,border-color] focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent";
-
-  if (convertKitAction) {
-    return (
-      <form
-        method="post"
-        action={convertKitAction}
-        className="mt-10 max-w-md space-y-5"
-      >
-        <div>
-          <label
-            htmlFor="waitlist-email"
-            className="mb-2 block text-sm font-medium text-[hsl(var(--foreground))]/90"
-          >
-            Email
-          </label>
-          <input
-            id="waitlist-email"
-            type="email"
-            name="email_address"
-            required
-            autoComplete="email"
-            placeholder="you@example.com"
-            className={fieldClass}
-          />
-        </div>
-        <p className="text-xs text-[hsl(var(--foreground))]/55">
-          By joining, you agree to hear from us about the beta, TestFlight, and
-          App Store launch. Unsubscribe anytime from ConvertKit emails.
-        </p>
-        <button
-          type="submit"
-          className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 sm:w-auto"
-        >
-          Join the iOS list
-        </button>
-      </form>
-    );
-  }
-
-  if (googleEmbedUrl) {
-    return (
-      <div className="mt-10 overflow-hidden rounded-2xl border border-[hsl(var(--foreground))]/12 bg-[hsl(var(--foreground))]/[0.02] shadow-[0_8px_24px_-8px_rgb(0_0_0_/0.1)]">
-        <iframe
-          title="LunarCast beta and launch signup"
-          src={googleEmbedUrl}
-          className="h-[min(75vh,760px)] w-full border-0"
-          loading="lazy"
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className="mt-10 rounded-2xl border border-dashed border-[hsl(var(--foreground))]/25 bg-[hsl(var(--foreground))]/[0.03] px-6 py-8"
-      role="status"
-    >
-      <p className="text-sm leading-6 text-[hsl(var(--foreground))]/80">
-        <strong className="font-medium text-[hsl(var(--foreground))]">
-          Waitlist not connected yet.
-        </strong>{" "}
-        Add one public env var, then redeploy:&nbsp;
-        <code className="rounded bg-[hsl(var(--foreground))]/10 px-1.5 py-0.5 text-[0.85rem]">
-          NEXT_PUBLIC_CONVERTKIT_FORM_ACTION
-        </code>{" "}
-        (ConvertKit form POST URL) or{" "}
-        <code className="rounded bg-[hsl(var(--foreground))]/10 px-1.5 py-0.5 text-[0.85rem]">
-          NEXT_PUBLIC_WAITLIST_FORM_EMBED_URL
-        </code>{" "}
-        (Google Forms embed URL with{" "}
-        <code className="rounded bg-[hsl(var(--foreground))]/10 px-1 py-0.5 text-[0.8rem]">
-          embedded=true
-        </code>
-        ). See README.
-      </p>
-    </div>
-  );
-}
-
 function SectionHeading({
   id,
   children,
@@ -303,12 +216,6 @@ export default function HomePage() {
                   <AppStoreCta variant="primary">
                     Download on the App Store
                   </AppStoreCta>
-                  <a
-                    href="#waitlist"
-                    className="w-fit text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 hover:underline"
-                  >
-                    Beta &amp; App Store alert
-                  </a>
                   <a
                     href="#how-its-different"
                     className="w-fit text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 hover:underline"
@@ -550,37 +457,6 @@ export default function HomePage() {
                 </figure>
               ))}
             </div>
-          </section>
-
-          <section
-            id="waitlist"
-            className="border-b border-[hsl(var(--foreground))]/10 py-16 sm:py-20"
-            aria-labelledby="waitlist-heading"
-          >
-            <SectionHeading id="waitlist-heading">
-              Beta access &amp; App Store launch (iOS)
-            </SectionHeading>
-            <p className="mt-4 max-w-2xl text-[hsl(var(--foreground))]/80">
-              LunarCast is for{" "}
-              <span className="text-[hsl(var(--foreground))]/95">
-                iPhone and iPad only
-              </span>
-              . Leave your email to get a beta link when invites open, and a
-              single heads-up when the app is live on the App Store—no drip
-              campaign, no unrelated promos.
-            </p>
-            <WaitlistForm />
-            <p className="mt-6 max-w-2xl text-xs leading-relaxed text-[hsl(var(--foreground))]/50">
-              Your address is only used for LunarCast beta and launch mail. See
-              the{" "}
-              <Link
-                href="/privacy"
-                className="text-accent underline-offset-4 hover:underline"
-              >
-                privacy page
-              </Link>{" "}
-              for how we use data and why we built the app.
-            </p>
           </section>
 
           <section className="py-16 sm:py-20" aria-labelledby="privacy-heading">

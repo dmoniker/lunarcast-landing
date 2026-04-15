@@ -36,12 +36,14 @@ export default function PrivacyPage() {
           them; we are not interested in tricking you into engagement.
         </p>
         <p>
-          If you join the waitlist, we use your email only to send beta access,
-          launch updates, and related LunarCast messages—not unrelated campaigns.
-          You can unsubscribe from those mailings at any time. Anything the app
-          needs to function in the future (for example, account or playback
-          data) will be collected only for that purpose, not to profile you for
-          ads.
+          If we email you about LunarCast—for example, when you write in for
+          support or opt into updates—we use your address only for that
+          conversation and related LunarCast messages, not unrelated campaigns.
+          You can
+          unsubscribe from marketing or newsletter mailings when those channels
+          allow it. Anything the app needs to function in the future (for
+          example, account or playback data) will be collected only for that
+          purpose, not to profile you for ads.
         </p>
         <p>
           If you have questions about privacy or this approach, reply to any
