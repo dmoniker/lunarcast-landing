@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const appStoreUrl = "https://apps.apple.com/app/lunarcast/id6761336207";
+const githubUrl = "https://github.com/dmoniker/moonlex";
 
 /** Flip to `true` when the App Store listing is live. */
 const APP_STORE_LIVE = true;
@@ -495,7 +496,15 @@ export default function HomePage() {
                 Because the moon had it coming.
               </p>
             </div>
-            <div className="flex items-center gap-5">
+            <div className="flex flex-wrap items-center gap-5">
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 hover:underline"
+              >
+                Source on GitHub
+              </a>
               <Link
                 href="/support"
                 className="text-sm text-[hsl(var(--foreground))]/70 underline-offset-4 hover:underline"

@@ -3,7 +3,8 @@
 Public marketing site for [LunarCast](https://lunarcast.app), a native iOS podcast app. This repository is the web presence; the app itself is a separate codebase shipped through the App Store.
 
 **Live site:** [lunarcast.app](https://lunarcast.app)  
-**App Store:** [LunarCast on the App Store](https://apps.apple.com/app/lunarcast/id6761336207)
+**App Store:** [LunarCast on the App Store](https://apps.apple.com/app/lunarcast/id6761336207)  
+**iOS source:** [dmoniker/moonlex](https://github.com/dmoniker/moonlex) (MIT, open source)
 
 ## What LunarCast is
 
